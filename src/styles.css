@@ -59,6 +59,19 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-key: var(--key);
+  --color-key-hover: var(--key-hover);
+  --color-key-active: var(--key-active);
+  --color-key-foreground: var(--key-foreground);
+  --color-key-focus: var(--key-focus);
+  --color-suggestion: var(--suggestion);
+  --color-suggestion-hover: var(--suggestion-hover);
+  --color-suggestion-foreground: var(--suggestion-foreground);
+  --color-glass: var(--glass);
+  --color-glass-edge: var(--glass-edge);
+  --color-cyan-glow: var(--cyan-glow);
+  --shadow-key: var(--shadow-key);
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -95,6 +108,18 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --glass: oklch(0.12 0.015 220 / 84%);
+  --glass-edge: oklch(0.9 0.025 210 / 24%);
+  --key: oklch(0.49 0.018 220 / 70%);
+  --key-hover: oklch(0.6 0.04 205 / 80%);
+  --key-active: oklch(0.68 0.1 190 / 85%);
+  --key-foreground: oklch(0.98 0.004 220);
+  --key-focus: oklch(0.83 0.13 188);
+  --suggestion: oklch(0.68 0.012 220 / 58%);
+  --suggestion-hover: oklch(0.76 0.025 205 / 68%);
+  --suggestion-foreground: oklch(0.99 0.002 220);
+  --cyan-glow: oklch(0.72 0.16 190 / 58%);
+  --shadow-key: inset 0 1px 0 oklch(1 0 0 / 7%), 0 1px 3px oklch(0.05 0.01 220 / 18%);
 }
 
 .dark {
@@ -140,5 +165,30 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    margin: 0;
   }
+}
+
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+
+@utility keyboard-glass {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--glass) 96%, white 4%), var(--glass));
+  backdrop-filter: blur(26px) saturate(125%);
+  box-shadow: inset 0 1px 0 var(--glass-edge), 0 24px 80px oklch(0.05 0.02 210 / 40%);
+}
+
+@utility keyboard-glow {
+  background: radial-gradient(ellipse at 48% 120%, var(--cyan-glow), transparent 58%);
+}
+
+@utility caret {
+  animation: caret-blink 1.05s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret { animation: none; }
 }
