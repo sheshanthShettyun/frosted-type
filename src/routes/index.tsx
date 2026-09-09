@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import roomImage from "@/assets/keyboard-room.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,12 +33,11 @@ const homeRow: KeyDef[] = [
 ];
 const bottomRow: KeyDef[] = [
   { label: "shift", grow: 2.1, action: "shift" }, ..."zxcvbnm,./".split("").map((label) => ({ label })),
-  { label: "shift", grow: 1.8, action: "shift" }, { label: "↑", action: "up" },
+  { label: "shift", grow: 1.8, action: "shift" },
 ];
 const controlRow: KeyDef[] = [
   { label: "ctrl" }, { label: "win" }, { label: "alt" }, { label: "space", value: " ", grow: 5.35 },
   { label: "alt" }, { label: "fn" }, { label: "menu" }, { label: "ctrl" },
-  { label: "←", action: "left" }, { label: "↓", action: "down" }, { label: "→", action: "right" },
 ];
 
 const dictionary = ["I", "The", "I'm", "This", "There", "That", "Your", "You", "We", "Welcome"];
@@ -103,9 +101,7 @@ function Index() {
   );
 
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-background">
-      <img src={roomImage} alt="Modern living room with a teal sofa" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-foreground/10" aria-hidden="true" />
+    <main className="relative min-h-dvh overflow-hidden bg-muted">
       <section aria-label="Virtual keyboard" className="keyboard-glass absolute inset-x-[3vw] bottom-[4vh] mx-auto max-w-[1450px] overflow-hidden rounded-[32px] px-4 pb-5 pt-5 text-key-foreground sm:px-6 sm:pb-8 sm:pt-7 lg:px-8">
         <div className="keyboard-glow pointer-events-none absolute inset-x-0 bottom-0 h-48" aria-hidden="true" />
         <div className="relative z-10">
@@ -127,8 +123,22 @@ function Index() {
               {renderRow(numberRow)}
               {renderRow(qwertyRow)}
               {renderRow(homeRow)}
-              {renderRow(bottomRow)}
-              {renderRow(controlRow)}
+              <div className="grid min-w-[850px] grid-cols-[1fr_12.25rem] gap-1.5 sm:grid-cols-[1fr_13rem] sm:gap-2">
+                {renderRow(bottomRow)}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                  <span aria-hidden="true" />
+                  <Button type="button" variant="key" size="key" aria-label="up" onClick={() => press({ label: "↑", action: "up" })}>↑</Button>
+                  <span aria-hidden="true" />
+                </div>
+              </div>
+              <div className="grid min-w-[850px] grid-cols-[1fr_12.25rem] gap-1.5 sm:grid-cols-[1fr_13rem] sm:gap-2">
+                {renderRow(controlRow)}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                  <Button type="button" variant="key" size="key" aria-label="left" onClick={() => press({ label: "←", action: "left" })}>←</Button>
+                  <Button type="button" variant="key" size="key" aria-label="down" onClick={() => press({ label: "↓", action: "down" })}>↓</Button>
+                  <Button type="button" variant="key" size="key" aria-label="right" onClick={() => press({ label: "→", action: "right" })}>→</Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
