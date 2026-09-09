@@ -16,12 +16,17 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        key: "bg-key text-key-foreground shadow-key hover:bg-key-hover active:translate-y-px active:bg-key-active focus-visible:ring-2 focus-visible:ring-key-focus",
+        suggestion: "bg-suggestion text-suggestion-foreground hover:bg-suggestion-hover active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-key-focus",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        key: "h-12 min-w-0 rounded-[7px] px-1 text-[clamp(0.65rem,1.25vw,1rem)] font-normal sm:h-14",
+        functionKey: "h-10 min-w-0 rounded-[6px] px-1 text-[clamp(0.55rem,1vw,0.8rem)] font-normal sm:h-12",
+        suggestion: "h-14 rounded-full px-5 text-lg font-medium sm:h-18 sm:text-xl",
       },
     },
     defaultVariants: {
